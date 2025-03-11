@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book{
+    public:
+    string title;
+    string author;
+    string publisher;
+    Book(string title,string author,string publisher){
+        this->title=title;
+        this->author=author;
+        this->publisher=publisher;
+        cout<<"Hey, look at me!I exist!"<<endl;
+    }
+    void display() {
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "Publisher: " << publisher << endl;
+    }
+};
+
+class FictionBook:public Book{
+    public:
+    string genre;
+    string protagonist;
+    FictionBook(string title, string author, string publisher, string genre, string protagonist)
+        : Book(title, author, publisher) {
+        this->genre=genre;
+        this->protagonist=protagonist;
+    }
+    void display() {
+        Book::display();
+        cout << "Genre: " << genre << endl;
+        cout << "Protagonist: " << protagonist << endl;
+    }
+};
+
+int main(){
+    FictionBook fb("Harry Potter and the Sorcerers Stone", "J.K. Rowling", "Bloomsbury", "Fantasy", "Harry Potter");
+    fb.display();
+    return 0;
+}
