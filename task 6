@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Device {
+public:
+    string brand;
+    string model;
+
+    Device(string brand = "Unknown", string model = "Unknown") {
+        this->brand = brand;
+        this->model = model;
+    }
+
+    void showDevice() {
+        cout << "Brand: " << brand << endl;
+        cout << "Model: " << model << endl;
+    }
+};
+
+class Smartphone : public Device {
+public:
+    int simSlots;
+
+    Smartphone(string brand, string model, int simSlots)
+        : Device(brand, model) {
+        this->simSlots = simSlots;
+    }
+
+    void showSmartphone() {
+        showDevice();
+        cout << "SIM Slots: " << simSlots << endl;
+    }
+};
+
+class Tablet : public Device {
+public:
+    bool hasStylus;
+
+    Tablet(string brand, string model, bool hasStylus)
+        : Device(brand, model) {
+        this->hasStylus = hasStylus;
+    }
+
+    void showTablet() {
+        showDevice();
+        cout << "Stylus Support: " << (hasStylus ? "Yes" : "No") << endl;
+    }
+};
+
+class HybridDevice : public Smartphone, public Tablet {
+public:
+    HybridDevice(string brand, string model, int simSlots, bool hasStylus)
+        : Smartphone(brand, model, simSlots), Tablet(brand, model, hasStylus),
+          Device(brand, model) {}
+
+    void showHybridDevice() {
+        cout << "Hybrid Device Details" << endl;
+        Smartphone::showDevice();
+        cout << "SIM Slots: " << simSlots << endl;
+        cout << "Stylus Support: " << (hasStylus ? "Yes" : "No") << endl;
+    }
+};
+
+int main() {
+    HybridDevice hybridGadget("TechCorp", "UltraPad Pro", 2, true);
+    hybridGadget.showHybridDevice();
+    return 0;
+}
