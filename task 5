@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Vehicle {
+public:
+    string make;
+    string model;
+    int year;
+    Vehicle(string make, string model, int year) {
+        this->make = make;
+        this->model = model;
+        this->year = year;
+    }
+    void showVehicle() {
+        cout << "Make: " << make << endl;
+        cout << "Model: " << model << endl;
+        cout << "Year: " << year << endl;
+    }
+};
+
+class Car : public Vehicle {
+public:
+    int doors;
+    double fuelEfficiency; 
+    Car(string make, string model, int year, int doors, double fuelEfficiency)
+        : Vehicle(make, model, year) {
+        this->doors = doors;
+        this->fuelEfficiency = fuelEfficiency;
+    }
+    void showCar() {
+        showVehicle();
+        cout << "Doors: " << doors << endl;
+        cout << "Fuel Efficiency: " << fuelEfficiency << " km/l" << endl;
+    }
+};
+
+class ElectricCar : public Car {
+public:
+    double batteryLife;
+    ElectricCar(string make, string model, int year, int doors, double batteryLife)
+        : Car(make, model, year, doors, 0) { 
+        this->batteryLife = batteryLife;
+    }
+    void showElectricCar() {
+        showCar();
+        cout << "Battery Life: " << batteryLife << " km" << endl;
+    }
+};
+
+int main() {
+    ElectricCar tesla("Tesla", "Model 3", 2024, 4, 500.0);
+    cout << "Electric Car Details" << endl;
+    tesla.showElectricCar();
+    return 0;
+}
