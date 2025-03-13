@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person {
+public:
+    string name;
+    int age;
+
+    Person(string name = "Unknown", int age = 0) : name(name), age(age) {}
+
+    void showPerson() {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+    }
+};
+
+class Student : public Person {
+public:
+    int studentID;
+    int gradeLevel;
+
+    Student(string name, int age, int studentID, int gradeLevel)
+        : Person(name, age), studentID(studentID), gradeLevel(gradeLevel) {}
+
+    void showStudent() {
+        showPerson();
+        cout << "Student ID: " << studentID << endl;
+        cout << "Grade Level: " << gradeLevel << endl;
+    }
+};
+
+class Teacher : public Person {
+public:
+    string subject;
+    int roomNumber;
+
+    Teacher(string name, int age, string subject, int roomNumber)
+        : Person(name, age), subject(subject), roomNumber(roomNumber) {}
+
+    void showTeacher() {
+        showPerson();
+        cout << "Subject: " << subject << endl;
+        cout << "Room Number: " << roomNumber << endl;
+    }
+};
+
+class GraduateStudent : public Student, public Teacher {
+public:
+    GraduateStudent(string name, int age, int studentID, int gradeLevel, string subject, int roomNumber)
+        : Student(name, age, studentID, gradeLevel), Teacher(name, age, subject, roomNumber) {}
+
+    void showGraduateStudent() {
+        cout << "Graduate Student Details " << endl;
+        Student::showStudent();  
+        cout << "Teaching Subject: " << subject << endl;
+        cout << "Teaching Room: " << roomNumber << endl;
+    }
+};
+
+int main() {
+    GraduateStudent gs("Alex Johnson", 24, 1024, 16, "Computer Science", 305);
+    gs.showGraduateStudent();
+
+    return 0;
+}
