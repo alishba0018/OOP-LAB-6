@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Position {
+public:
+    int x, y, z;
+    Position(int x = 0, int y = 0, int z = 0) : x(x), y(y), z(z) {}
+    void setPosition(int newX, int newY, int newZ) {
+        x = newX;
+        y = newY;
+        z = newZ;
+    }
+    void showPosition() {
+        cout << "Position - X: " << x << ", Y: " << y << ", Z: " << z << endl;
+    }
+};
+
+class Health {
+public:
+    int health;
+    Health(int health = 100) : health(health) {}
+    void takeDamage(int damage) {
+        health -= damage;
+        if (health < 0) health = 0;
+    }
+    void showHealth() {
+        cout << "Health: " << health << endl;
+    }
+};
+
+class Character : public Position, public Health {
+public:
+    string name;
+    Character(string name, int x, int y, int z, int health)
+        : Position(x, y, z), Health(health), name(name) {}
+    void showCharacter() {
+        cout << "Character: " << name << endl;
+        showPosition();
+        showHealth();
+    }
+};
+
+int main() {
+    Character hero("Knight", 10, 20, 30, 150);
+    hero.showCharacter();
+    cout << "The hero takes 40 damage!!" << endl;
+    hero.takeDamage(40);
+    hero.showHealth();
+    cout << "The hero moves to a new position..." << endl;
+    hero.setPosition(25, 15, 5);
+    hero.showPosition();
+    return 0;
+}
