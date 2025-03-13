@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Character{
+    public:
+    int health;
+    int damage;
+    Character(int health,int damage){
+        this->health=health;
+        this->damage=damage;
+    }
+    void display() {
+        cout << "Health: " << health << endl;
+        cout << "Damage: " << damage << endl;
+    }
+};
+
+class Enemy:public Character{
+    public:
+    string eName;
+    Enemy(int health,int damage,string eName): Character(health,damage) {
+        this->eName=eName;
+        }
+    void display() {
+        Character::display();
+        cout << "Enemy: " << eName << endl;
+    }
+};
+
+class Player:public Character{
+    public:
+    string pName;
+    Player(int health,int damage,string pName)
+        : Character(health,damage) {
+        this->pName=pName;
+        }
+    void display() {
+        Character::display();
+        cout << "Player: " << pName << endl;
+    }
+};
+
+class Wizard:public Player{
+    public:
+    string spell;
+    string power;
+    Wizard(int health, int damage,string pName,string spell,string power)
+        : Player(health,damage,pName) {
+        this->spell=spell;
+        this->power=power;
+        }
+    void display() {
+        Player::display();
+        cout << "Wizard Spell: " << spell << endl;
+        cout << "Wizard Power: " << power << endl;
+    }
+};
+
+int main(){
+    Wizard w1(120, 30, "Gandalf", "Abra Ca Dabra", "Invisibility");
+    w1.display();
+    return 0;
+}
